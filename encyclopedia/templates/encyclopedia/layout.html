@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <style>
+        .blink {
+        animation: blinker 0.6s linear infinite;
+        color: #1c87c9;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+      </style>
+    <body>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3 col-sm-3 col-3">
+                <img src="https://image.freepik.com/free-vector/english-language-studying-internet-glossary-modern-vocabulary-dictionary-idea-translator-with-laptop-woman-searching-definition-online_335657-3544.jpg" alt="Wiki" width="128" height="128">
+                <h2 class="blink"> Weekee</h2>
+                <form action="{% url 'search' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <!-- 
+                        <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+                    -->
+                </form>
+                <div class="pt-2">
+                    <a href="{% url 'index' %}">Home</a>
+                </div>
+                <div>
+                    <a href="{% url 'create' %}">Create New Page</a>
+                </div>
+                <div>
+                    <a href="{% url 'randomEntry' %}">Random Page</a>
+                </div>
+               
+                
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main col-lg-10 col-md-9 col-sm-9 col-9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>

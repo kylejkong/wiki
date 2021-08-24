@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Weekee
+{% endblock %}
+
+{% block body %}
+
+{% if msg_success %}
+
+<div class="alert alert-primary" role="alert"> Page "{{title}}" Has Been Terminated. What's Next? </div>
+
+{% endif %}
+    <p style="text-shadow: 1px 1px chocolate; color:blue; font-size: 33px ">Welcome To Weekeepeedia!</p>
+    <p style="font-size: 15px;"> Weekeepeedia is a wiki-like page except it is a lil wee and leaves lots of room for improvment.</p>
+    <h1>All Pages</h1>
+    <ul class="no-bullet">
+        {% for entry in entries %}
+            <li><a href="{% url 'entry' entry %}">{{forloop.counter}}-{{ entry|capfirst }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
